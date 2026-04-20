@@ -1,6 +1,8 @@
 package com.example.gamescore;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private int score1 = 0;
+    private int score2 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +24,26 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        TextView textViewScoreTeam1 = findViewById(R.id.TextViewScoreTeam1);
+        TextView textViewScoreTeam2 = findViewById(R.id.TextViewScoreTeam2);
+
+        textViewScoreTeam1.setText(String.valueOf(score1));
+        textViewScoreTeam2.setText(String.valueOf(score2));
+
+        textViewScoreTeam1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewScoreTeam1.setText(String.valueOf(++score1));
+            }
+        });
+
+        textViewScoreTeam2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewScoreTeam2.setText(String.valueOf(++score2));
+            }
         });
     }
 }
