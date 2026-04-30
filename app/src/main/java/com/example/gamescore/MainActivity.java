@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int score1 = 0;
     private int score2 = 0;
+    private TextView textViewScoreTeam1;
+    private TextView textViewScoreTeam2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +29,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        textViewScoreTeam1 = findViewById(R.id.TextViewScoreTeam1);
+        textViewScoreTeam2 = findViewById(R.id.TextViewScoreTeam2);
+
         if (savedInstanceState != null) {
             score1 = savedInstanceState.getInt("score1");
             score2 = savedInstanceState.getInt("score2");
         }
 
-        TextView textViewScoreTeam1 = findViewById(R.id.TextViewScoreTeam1);
-        TextView textViewScoreTeam2 = findViewById(R.id.TextViewScoreTeam2);
+        updateScore1();
+        updateScore2();
 
         textViewScoreTeam1.setText(String.valueOf(score1));
         textViewScoreTeam2.setText(String.valueOf(score2));
@@ -41,16 +46,35 @@ public class MainActivity extends AppCompatActivity {
         textViewScoreTeam1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textViewScoreTeam1.setText(String.valueOf(++score1));
+                score1++;
+                updateScore1();
             }
         });
 
         textViewScoreTeam2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textViewScoreTeam2.setText(String.valueOf(++score2));
+                score2++;
+                updateScore2();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    private void updateScore1(){
+        textViewScoreTeam1.setText(String.valueOf(score1));
+    }
+    private void updateScore2(){
+        textViewScoreTeam2.setText(String.valueOf(score2));
     }
 
     @Override
